@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banca Brasileira - DamadaSorte: Jogos Online, Bônus Exclusivos e Promoções</title>
+  <meta name="description" content="Descubra a Banca Brasileira no DamadaSorte.com.br! Aproveite bônus de até R$2.000, jogos online emocionantes e promoções exclusivas. Jogue agora e seja um vencedor!">
+  <meta name="keywords" content="Banca Brasileira, DamadaSorte, jogos online, bônus de boas-vindas, promoções de cassino, apostas, Brasil">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+  <style>
+    :root {
+      --primary: #374151; /* Light gray for navbar and inputs */
+      --card-bg: #ffffff; /* White for card backgrounds */
+      --brazil-green: #22c55e; /* Brazilian green */
+      --brazil-yellow: #facc15; /* Brazilian yellow */
+      --brazil-blue: #2563eb; /* Brazilian blue */
+      --text-primary: #1f2937; /* Black for card text */
+      --text-secondary: #4b5563; /* Dark gray for secondary text */
+    }
+    body {
+      background: linear-gradient(180deg, var(--brazil-green), var(--brazil-yellow), var(--brazil-blue));
+      color: var(--text-primary);
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    .navbar {
+      background: rgba(55, 65, 81, 0.95);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .nav-container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .nav-links a {
+      color: #f3f4f6;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s, transform 0.3s;
+      position: relative;
+      padding: 0.4rem;
+    }
+    .nav-links a:hover {
+      color: var(--brazil-yellow);
+      transform: translateY(-2px);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: var(--brazil-yellow);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .hamburger span {
+      width: 24px;
+      height: 3px;
+      background: #f3f4f6;
+      margin: 2px 0;
+      transition: all 0.3s;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+    section {
+      padding: 60px 16px;
+      min-height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(30px);
+      margin-bottom: 12px;
+    }
+    #inicio {
+      padding-top: 100px;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      max-width: 1000px;
+      width: 95%;
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin: 10px 0;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    }
+    h1, h2 {
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--brazil-green), var(--brazil-yellow), var(--brazil-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.25rem;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      font-size: 3.2rem;
+      line-height: 1.1;
+    }
+    h2 {
+      font-size: 2.5rem;
+    }
+    p, li {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    .highlight {
+      color: var(--brazil-yellow);
+      font-weight: 700;
+    }
+    .mascot-img, .prom-img {
+      max-width: 100%;
+      width: 300px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+    .mascot-img:hover, .prom-img:hover {
+      transform: scale(1.03);
+    }
+    .table-container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 16px;
+      backdrop-filter: blur(8px);
+      width: 100%;
+      max-width: 700px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    th {
+      background: linear-gradient(90deg, var(--brazil-green), var(--brazil-yellow));
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+    .btn {
+      background: var(--brazil-green);
+      color: var(--text-primary);
+      padding: 14px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: background 0.3s, transform 0.3s;
+      display: inline-block;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    }
+    .btn:hover {
+      background: var(--brazil-yellow);
+      color: var(--text-primary);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.25);
+    }
+    .form-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 24px;
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+      width: 100%;
+      max-width: 450px;
+    }
+    input {
+      background: var(--primary);
+      border: 2px solid var(--brazil-blue);
+      color: #f3f4f6;
+      padding: 12px;
+      border-radius: 8px;
+      width: 100%;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: border-color 0.3s;
+    }
+    input:focus {
+      outline: none;
+      border-color: var(--brazil-yellow);
+    }
+    label {
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      display: block;
+      font-size: 1.1rem;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      width: 100%;
+      max-width: 1000px;
+    }
+    video {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+      border: 2px solid var(--brazil-blue);
+    }
+    video:hover {
+      transform: scale(1.03);
+      border-color: var(--brazil-yellow);
+    }
+    footer {
+      background: rgba(55, 65, 81, 0.95);
+      padding: 20px 0;
+      text-align: center;
+      width: 100%;
+    }
+    .flag-img {
+      width: 140px; /* 7:10 ratio maintained */
+      height: 100px;
+      margin: 0 auto;
+      display: block;
+      border-radius: 5px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(55, 65, 81, 0.95);
+        padding: 1rem 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .nav-links a {
+        font-size: 0.95rem;
+        padding: 0.5rem 1rem;
+        text-align: center;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .navbar {
+        padding: 10px 0;
+      }
+      section {
+        padding: 40px 10px;
+        margin-bottom: 8px;
+      }
+      #inicio {
+        padding-top: 120px;
+      }
+      .card {
+        padding: 18px;
+        width: 96%;
+        margin: 8px 0;
+      }
+      h1 {
+        font-size: 2.2rem;
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+      p, li {
+        font-size: 0.95rem;
+      }
+      .btn {
+        padding: 12px 28px;
+        font-size: 0.95rem;
+      }
+      .mascot-img, .prom-img {
+        width: 100%;
+        max-width: 240px;
+      }
+      .table-container {
+        padding: 10px;
+        max-width: 100%;
+      }
+      table {
+        font-size: 0.85rem;
+      }
+      th, td {
+        padding: 8px;
+      }
+      .form-container {
+        padding: 18px;
+        max-width: 100%;
+      }
+      input {
+        padding: 10px;
+        font-size: 0.9rem;
+      }
+      label {
+        font-size: 0.95rem;
+      }
+      .video-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+    }
+    @media (max-width: 480px) {
+      .nav-links a {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+      }
+      section {
+        padding: 32px 8px;
+        margin-bottom: 6px;
+      }
+      #inicio {
+        padding-top: 100px;
+      }
+      .card {
+        padding: 14px;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+      p, li {
+        font-size: 0.9rem;
+      }
+      .btn {
+        padding: 10px 24px;
+        font-size: 0.9rem;
+      }
+      .mascot-img, .prom-img {
+        max-width: 200px;
+      }
+      table {
+        font-size: 0.8rem;
+      }
+      th, td {
+        padding: 6px;
+      }
+      .form-container {
+        padding: 14px;
+      }
+      input {
+        padding: 8px;
+        font-size: 0.85rem;
+      }
+      label {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar py-3">
+    <div class="nav-container">
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-links" id="nav-links">
+        <a href="#inicio" class="nav-link">INÍCIO</a>
+        <a href="#tutoriais" class="nav-link">TUTORIAIS</a>
+        <a href="#jogar" class="nav-link">JOGAR</a>
+        <a href="#promotoria" class="nav-link">PROMOTORIA</a>
+        <a href="#politicas" class="nav-link">POLÍTICAS</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="inicio" class="relative">
+    <div class="card flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="max-w-lg text-center md:text-left">
+        <h1>Bem-vindo à Banca Brasileira</h1>
+        <p class="mb-6">Junte-se à DamadaSorte e aproveite bônus exclusivos para maximizar suas chances de ganhar!</p>
+        <ul class="list-disc list-inside mb-6 space-y-2">
+          <li>30% de bônus de boas-vindas no primeiro depósito até <span class="highlight">R$2.000</span></li>
+          <li>20% de bônus nos dias de federais</li>
+          <li>10% de bônus nos dias normais</li>
+        </ul>
+        <a href="https://app.bancabrasileira.com.br/pr/5nLhUDEr" class="btn" target="_blank">JOGAR AGORA</a>
+      </div>
+      <img src="mascote.png" alt="Mascote da Banca Brasileira" class="mascot-img mt-6 md:mt-0 md:ml-6">
+    </div>
+  </section>
+
+  <section id="jogar" class="relative">
+    <div class="card flex flex-col items-center">
+      <h2>COTAÇÃO JB</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Valor (R$)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Unidade</td><td>8,00</td></tr>
+            <tr><td>Grupo</td><td>20,00</td></tr>
+            <tr><td>Dezena</td><td>80,00</td></tr>
+            <tr><td>Centena</td><td>800,00</td></tr>
+            <tr><td>Milhar</td><td>8.000,00</td></tr>
+            <tr><td>Duque GP</td><td>180,00</td></tr>
+            <tr><td>Terno GP</td><td>1.500,00</td></tr>
+            <tr><td>Quadra GP</td><td>1.000,00</td></tr>
+            <tr><td>Quina GP (8/5)</td><td>1.000,00</td></tr>
+            <tr><td>Sena GP (10/6)</td><td>1.000,00</td></tr>
+            <tr><td>Duque Dez</td><td>300,00</td></tr>
+            <tr><td>Terno Dez Seco</td><td>10.000,00</td></tr>
+            <tr><td>Terno Dez</td><td>5.000,00</td></tr>
+            <tr><td>Passe Vai</td><td>90,00</td></tr>
+            <tr><td>Passe Vai Vem</td><td>45,00</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <a href="https://app.bancabrasileira.com.br/pr/5nLhUDEr" class="btn mt-6" target="_blank">JOGAR AGORA</a>
+    </div>
+  </section>
+
+  <section id="promotoria" class="relative">
+    <div class="card flex flex-col items-center">
+      <h2>PROMOTORIA</h2>
+      <p class="text-center mb-6 max-w-lg">Seja um promotor da Banca Brasileira e ganhe <span class="highlight">10% de comissão</span> nas vendas do JB e <span class="highlight">10% do cassino positivo</span>!</p>
+      <div class="form-container">
+        <div id="promotoria-form">
+          <div class="mb-5">
+            <label for="name">Nome</label>
+            <input type="text" id="name" required>
+          </div>
+          <div class="mb-5">
+            <label for="phone">Número</label>
+            <input type="tel" id="phone" required>
+          </div>
+          <button type="submit" class="btn w-full">ENVIAR PARA O WHATSAPP</button>
+        </div>
+      </div>
+      <img src="prom.png" alt="Imagem Promotoria" class="prom-img mt-6">
+    </div>
+  </section>
+
+  <section id="tutoriais" class="relative">
+    <div class="card flex flex-col items-center">
+      <h2>TUTORIAIS</h2>
+      <p class="text-center mb-6 max-w-lg">Confira nossos vídeos tutoriais para aprender tudo sobre a Banca Brasileira!</p>
+      <div class="video-grid">
+        <video controls><source src="1.mp4" type="video/mp4"></video>
+        <video controls><source src="2.mp4" type="video/mp4"></video>
+        <video controls><source src="3.mp4" type="video/mp4"></video>
+        <video controls><source src="4.mp4" type="video/mp4"></video>
+        <video controls><source src="5.mp4" type="video/mp4"></video>
+        <video controls><source src="6.mp4" type="video/mp4"></video>
+        <video controls><source src="7.mp4" type="video/mp4"></video>
+        <video controls><source src="8.mp4" type="video/mp4"></video>
+        <video controls><source src="9.mp4" type="video/mp4"></video>
+        <video controls><source src="10.mp4" type="video/mp4"></video>
+        <video controls><source src="11.mp4" type="video/mp4"></video>
+        <video controls><source src="12.mp4" type="video/mp4"></video>
+        <video controls><source src="13.mp4" type="video/mp4"></video>
+        <video controls><source src="14.mp4" type="video/mp4"></video>
+      </div>
+    </div>
+  </section>
+
+  <section id="politicas" class="relative">
+    <div class="card flex flex-col items-center">
+      <h2>POLÍTICAS</h2>
+      <p class="text-center mb-6 max-w-lg">Conheça nossas políticas de uso, termos e condições para uma experiência segura e transparente na DamadaSorte.</p>
+      <a href="https://damadasorte.com.br/politicas" class="btn" target="_blank">VER POLÍTICAS</a>
+    </div>
+  </section>
+
+  <footer>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg" alt="Bandeira do Brasil" class="flag-img">
+  </footer>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.utils.toArray("section").forEach((section) => {
+      gsap.fromTo(
+        section,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 90%",
+            end: "bottom 10%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    });
+
+    gsap.fromTo(
+      "footer",
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "footer",
+          start: "top 95%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+
+    document.getElementById("promotoria-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const message = `Novo promotor: Nome: ${name}, Número: ${phone}`;
+      const whatsappUrl = `https://wa.me/5547999171448?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank");
+    });
+
+    document.querySelectorAll(".nav-link").forEach(anchor => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute("href").substring(1);
+        const targetSection = document.getElementById(targetId);
+        window.scrollTo({
+          top: targetSection.offsetTop - 60,
+          behavior: "smooth"
+        });
+        if (window.innerWidth <= 768) {
+          document.getElementById("nav-links").classList.remove("active");
+          document.getElementById("hamburger").classList.remove("active");
+        }
+      });
+    });
+
+    document.getElementById("hamburger").addEventListener("click", function () {
+      this.classList.toggle("active");
+      document.getElementById("nav-links").classList.toggle("active");
+    });
+  </script>
+</body>
+</html>
