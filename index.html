@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Banca Brasileira - DamadaSorte: Jogos Online, Bônus Exclusivos e Promoções</title>
+  <title>Banca Brasileira - Jogos Online, Bônus Exclusivos e Promoções</title>
   <meta name="description" content="Descubra a Banca Brasileira no DamadaSorte.com.br! Aproveite bônus de até R$2.000, jogos online emocionantes e promoções exclusivas. Jogue agora e seja um vencedor!">
   <meta name="keywords" content="Banca Brasileira, DamadaSorte, jogos online, bônus de boas-vindas, promoções de cassino, apostas, Brasil">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -150,14 +150,19 @@
       color: var(--brazil-yellow);
       font-weight: 700;
     }
-    .mascot-img, .prom-img {
+    .mascot-img {
+      max-width: 100%;
+      width: 300px;
+      border-radius: 16px;
+    }
+    .prom-img {
       max-width: 100%;
       width: 300px;
       border-radius: 16px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s;
     }
-    .mascot-img:hover, .prom-img:hover {
+    .prom-img:hover {
       transform: scale(1.03);
     }
     .table-container {
@@ -418,7 +423,7 @@
     <div class="card flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="max-w-lg text-center md:text-left">
         <h1>Bem-vindo à Banca Brasileira</h1>
-        <p class="mb-6">Junte-se à DamadaSorte e aproveite bônus exclusivos para maximizar suas chances de ganhar!</p>
+        <p class="mb-6">Junte-se à Banca Brasileira e aproveite bônus exclusivos para maximizar suas chances de ganhar!</p>
         <ul class="list-disc list-inside mb-6 space-y-2">
           <li>30% de bônus de boas-vindas no primeiro depósito até <span class="highlight">R$2.000</span></li>
           <li>20% de bônus nos dias de federais</li>
@@ -564,7 +569,7 @@
       const phone = document.getElementById("phone").value.trim();
       if (name && phone) {
         const message = `Novo promotor: Nome: ${name}, Número: ${phone}`;
-        const whatsappUrl = `https://wa.me/+5547999171448?text=${encodeURIComponent(message)}`;
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=+5547999171448&text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, "_blank");
         document.getElementById("name").value = "";
         document.getElementById("phone").value = "";
