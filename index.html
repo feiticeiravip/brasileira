@@ -560,11 +560,17 @@
 
     document.getElementById("promotoria-form").addEventListener("submit", function (e) {
       e.preventDefault();
-      const name = document.getElementById("name").value;
-      const phone = document.getElementById("phone").value;
-      const message = `Novo promotor: Nome: ${name}, Número: ${phone}`;
-      const whatsappUrl = `https://wa.me/5547999171448?text=${encodeURIComponent(message)}`;
-      window.open(whatsappUrl, "_blank");
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      if (name && phone) {
+        const message = `Novo promotor: Nome: ${name}, Número: ${phone}`;
+        const whatsappUrl = `https://wa.me/+5547999171448?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, "_blank");
+        document.getElementById("name").value = "";
+        document.getElementById("phone").value = "";
+      } else {
+        alert("Por favor, preencha todos os campos.");
+      }
     });
 
     document.querySelectorAll(".nav-link").forEach(anchor => {
