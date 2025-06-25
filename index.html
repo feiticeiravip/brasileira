@@ -474,19 +474,9 @@
       <h2>PROMOTORIA</h2>
       <p class="text-center mb-6 max-w-lg">Seja um promotor da Banca Brasileira e ganhe <span class="highlight">10% de comissão</span> nas vendas do JB e <span class="highlight">10% do cassino positivo</span>!</p>
       <div class="form-container">
-        <div id="promotoria-form">
-          <div class="mb-5">
-            <label for="name">Nome</label>
-            <input type="text" id="name" required placeholder="Digite seu nome">
-          </div>
-          <div class="mb-5">
-            <label for="phone">Número</label>
-            <input type="tel" id="phone" required placeholder="Digite seu número">
-          </div>
-          <button type="submit" class="btn w-full">ENVIAR PARA O WHATSAPP</button>
-        </div>
+        <img src="prom.png" alt="Imagem Promotoria" class="prom-img mb-6">
+        <a href="https://api.whatsapp.com/send?phone=+5511961459041&text=Desejo%20ser%20promotor!" class="btn w-full" target="_blank">VIRAR PROMOTOR</a>
       </div>
-      <img src="prom.png" alt="Imagem Promotoria" class="prom-img mt-6">
     </div>
   </section>
 
@@ -562,25 +552,6 @@
         },
       }
     );
-
-    document.getElementById("promotoria-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const name = document.getElementById("name").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      if (name && phone) {
-        const message = `Desejo ser promotor. Nome: ${name}, Número: ${phone}`;
-        const whatsappUrl = `https://api.whatsapp.com/send?phone=5511961459041&text=${encodeURIComponent(message)}`;
-        try {
-          window.open(whatsappUrl, "_blank");
-          document.getElementById("name").value = "";
-          document.getElementById("phone").value = "";
-        } catch (error) {
-          alert("Erro ao abrir o WhatsApp. Verifique se o aplicativo está instalado ou tente novamente.");
-        }
-      } else {
-        alert("Por favor, preencha todos os campos corretamente.");
-      }
-    });
 
     document.querySelectorAll(".nav-link").forEach(anchor => {
       anchor.addEventListener("click", function (e) {
